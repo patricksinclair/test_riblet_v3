@@ -1,0 +1,130 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 0.1;
+
+vertices
+(
+  (0.000  0.000  0.000)	 //vertex 0
+	(1.200  0.000  0.000)	 //vertex 1
+	(2.000  0.000  0.000)	 //vertex 2
+	(4.485  0.000  0.000)	 //vertex 3
+	(5.285  0.000  0.000)	 //vertex 4
+	(6.485  0.000  0.000)	 //vertex 5
+	(0.000  3.000  0.000)	 //vertex 6
+	(1.200  3.000  0.000)	 //vertex 7
+	(3.243  3.000  0.000)	 //vertex 8
+	(5.285  3.000  0.000)	 //vertex 9
+	(6.485  3.000  0.000)	 //vertex 10
+	(0.000  10.000  0.000)	 //vertex 11
+	(1.200  10.000  0.000)	 //vertex 12
+	(3.243  10.000  0.000)	 //vertex 13
+	(5.285  10.000  0.000)	 //vertex 14
+	(6.485  10.000  0.000)	 //vertex 15
+	(0.000  0.000  0.100)	 //vertex 16
+	(1.200  0.000  0.100)	 //vertex 17
+	(2.000  0.000  0.100)	 //vertex 18
+	(4.485  0.000  0.100)	 //vertex 19
+	(5.285  0.000  0.100)	 //vertex 20
+	(6.485  0.000  0.100)	 //vertex 21
+	(0.000  3.000  0.100)	 //vertex 22
+	(1.200  3.000  0.100)	 //vertex 23
+	(3.243  3.000  0.100)	 //vertex 24
+	(5.285  3.000  0.100)	 //vertex 25
+	(6.485  3.000  0.100)	 //vertex 26
+	(0.000  10.000  0.100)	 //vertex 27
+	(1.200  10.000  0.100)	 //vertex 28
+	(3.243  10.000  0.100)	 //vertex 29
+	(5.285  10.000  0.100)	 //vertex 30
+	(6.485  10.000  0.100)	 //vertex 31
+
+);
+
+ribletX_nC 12; //the no. of x-cells in the blocks on/above the riblets
+plateauX_nC 10; //the no. of x-cells in the blocks on/above the space between riblets
+
+surfaceY_nC 12; //the no. of y-cells in the blocks on the surface
+fluidY_nC 15; //the n0. of y-cells in the blocks in the surrounding fluid (e.g. ocean)
+
+
+blocks
+(
+    hex (0 1 7 6 16 17 23 22) ($plateauX_nC $surfaceY_nC 1) simpleGrading (1 1 1) //block 0
+    hex (1 2 8 7 17 18 24 23) ($ribletX_nC $surfaceY_nC 1) simpleGrading (1 1 1) //block 1
+    hex (3 4 9 8 19 20 25 24) ($ribletX_nC $surfaceY_nC 1) simpleGrading (1 1 1) //block 2
+    hex (4 5 10 9 20 21 26 25) ($plateauX_nC $surfaceY_nC 1) simpleGrading (1 1 1) //block 3
+
+    hex (6 7 12 11 22 23 28 27) ($plateauX_nC $fluidY_nC 1) simpleGrading (1 1 1) //block 4
+    hex (7 8 13 12 23 24 29 28) ($ribletX_nC $fluidY_nC 1) simpleGrading (1 1 1) //block 5
+    hex (8 9 14 13 24 25 30 29) ($ribletX_nC $fluidY_nC 1) simpleGrading (1 1 1) //block 6
+    hex (9 10 15 14 25 26 31 30) ($plateauX_nC $fluidY_nC 1) simpleGrading (1 1 1) //block 7
+);
+
+edges
+(
+);
+
+boundary
+(
+    leftWall
+    {
+        type wall;
+        faces
+        (
+            (0 6 22 16)
+            (6 11 27 22)
+        );
+    }
+    rightWall
+    {
+        type wall;
+        faces
+        (
+            (21 26 10 5)
+            (26 31 15 10)
+        );
+    }
+    lowerWall
+    {
+        type wall;
+        faces
+        (
+            (0 16 17 1)
+            (1 17 18 2)
+            (2 18 24 8)
+            (8 24 19 3)
+            (3 19 20 4)
+            (4 20 21 5)
+        );
+    }
+    atmosphere
+    {
+        type patch;
+        faces
+        (
+          (11 12 28 27)
+          (12 13 29 28)
+          (13 14 30 29)
+          (14 15 31 30)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //
