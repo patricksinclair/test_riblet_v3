@@ -18,7 +18,7 @@ dimensions      [0 0 0 0 0 0 0];
 
 internalField   uniform 0;
 
-contact_angle 2;
+contact_angle 5;
 
 boundaryField
 {
@@ -32,10 +32,9 @@ boundaryField
 
     rightWall
     {
-        type           constantAlphaContactAngle;
-        theta0         $contact_angle;
-        limit          gradient;
-        value          uniform 0;
+      type            inletOutlet;
+      inletValue      uniform 0;
+      value           uniform 0;
     }
 
     lowerWall

@@ -26,8 +26,7 @@ FoamFile
     }
     rightWall
     {
-        type            wall;
-        inGroups        List<word> 1(wall);
+        type            patch;
         nFaces          27;
         startFace       2320;
     }

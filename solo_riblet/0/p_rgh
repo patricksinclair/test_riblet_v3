@@ -31,7 +31,10 @@ boundaryField
     {
         // type            fixedFluxPressure;
         // value           uniform 0;
-        type            zeroGradient;
+
+        //type            zeroGradient;
+        type             totalPressure;
+        p0               uniform 0;
     }
 
     lowerWall
@@ -43,10 +46,10 @@ boundaryField
 
     atmosphere
     {
-        // type            totalPressure;
-        // p0              uniform 0;
-        type               fixedValue;
-        value              uniform 0;
+        type            totalPressure;
+        p0              uniform 0;
+        // type               fixedValue;
+        // value              uniform 0;
     }
 
     defaultFaces

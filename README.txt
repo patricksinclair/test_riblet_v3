@@ -38,4 +38,12 @@ This is a case containing a rough setup for the single riblet system.  This is b
 9. Changed the atmosphere back to an inletOutlet.
 	1) Face changed back to patch in blockMeshDict.
 	2) Velocity boundary condition changed back to pressureInletOutletVelocity, but with value uniform (4 0 0).
-	3) alpha.water boundary condition changed back to inletOutlet type.
+	3) alpha.water boundary condition changed back to inletOutlet type.  (Doing this removed those weird artifacts that were seen earlier.)
+	4) Velocity changed to fixed value rather than pressureInletOutletVelocity, not sure if this makes any difference, can change it back after we have the other walls
+	working as intended.
+
+10. Changed the right wall to an outlet.  This was done similarly to the atmosphere.
+	1) Changed the rightWall face type from wall -> patch in system/blockMeshDict.
+	2) Changed alpha.water boundary condition to type inletOutlet, just like atmosphere, in 0/alpha.water.orig.
+	3) Changed velocity boundary condition to pressureInletOutletVelocity (0 0 0).
+	4) Changed pressure boundary condition to totalPressure; uniform 0; (NB, also did this to the atmosphere boundary condition.)
