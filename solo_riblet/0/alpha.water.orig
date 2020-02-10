@@ -18,21 +18,32 @@ dimensions      [0 0 0 0 0 0 0];
 
 internalField   uniform 0;
 
+contact_angle 2;
+
 boundaryField
 {
     leftWall
     {
-        type            zeroGradient;
+        type           constantAlphaContactAngle;
+        theta0         $contact_angle;
+        limit          gradient;
+        value          uniform 0;
     }
 
     rightWall
     {
-        type            zeroGradient;
+        type           constantAlphaContactAngle;
+        theta0         $contact_angle;
+        limit          gradient;
+        value          uniform 0;
     }
 
     lowerWall
     {
-        type            zeroGradient;
+        type           constantAlphaContactAngle;
+        theta0         $contact_angle;
+        limit          gradient;
+        value          uniform 0;
     }
 
     atmosphere
@@ -40,6 +51,10 @@ boundaryField
         type            inletOutlet;
         inletValue      uniform 0;
         value           uniform 0;
+        // type           constantAlphaContactAngle;
+        // theta0         $contact_angle;
+        // limit          gradient;
+        // value          uniform 0;
     }
 
     defaultFaces

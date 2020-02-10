@@ -36,7 +36,9 @@ boundaryField
     atmosphere
     {
         type            pressureInletOutletVelocity;
-        value           uniform (0 0 0);
+        value           uniform (4 0 0);
+        // type            fixedValue;
+        // value           uniform (2 0 0);
     }
     defaultFaces
     {
