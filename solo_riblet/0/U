@@ -23,12 +23,16 @@ boundaryField
 {
     leftWall
     {
-        type            noSlip;
+        // type            pressureInletVelocity;
+        // value           uniform (0 0 0);
+        type zeroGradient;
+
     }
     rightWall
     {
-        type            pressureInletOutletVelocity;
-        value           uniform (0 0 0);
+      // type            pressureInletVelocity;
+      // value           uniform (0 0 0);
+      type zeroGradient;
     }
     lowerWall
     {

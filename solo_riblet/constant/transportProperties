@@ -21,7 +21,7 @@ water
 {
     //
     transportModel  Newtonian;
-    nu              2200.e-6;
+    nu              2200.e-5;
     rho             1450;
 }
 

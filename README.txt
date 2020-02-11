@@ -47,3 +47,11 @@ This is a case containing a rough setup for the single riblet system.  This is b
 	2) Changed alpha.water boundary condition to type inletOutlet, just like atmosphere, in 0/alpha.water.orig.
 	3) Changed velocity boundary condition to pressureInletOutletVelocity (0 0 0).
 	4) Changed pressure boundary condition to totalPressure; uniform 0; (NB, also did this to the atmosphere boundary condition.)
+	5) NB This setup eventually causes the system to "run dry" (I think), because everything gets thrown away due to the velocity.  Need to make the left wall an inlet to account for this (I hope)
+
+11. Changed the left wall to an inletOutlet (same as the top and right walls.)  Hopefully this will stop the timesteps becoming erroneously small.
+	1) Changed leftWall faces to type patch.
+	2) Changed pressure boundary condition from zeroGradient -> totalPressure; uniform 0;
+	3) Changed velocity boundary condition from noSlip -> pressureInletOutletVelocity;
+	4) Changed alpha.water boundary condition to inletoutlet; uniform 0;
+	4) NB This has maybe worked.

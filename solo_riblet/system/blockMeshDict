@@ -81,7 +81,7 @@ boundary
 (
     leftWall
     {
-        type wall;
+        type patch;
         faces
         (
             (0 6 22 16)
