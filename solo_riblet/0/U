@@ -15,6 +15,11 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+// //p_0 = $p_0;
+// p100 $p_1;
+// const scalar p1_i = p100;
+// h = $h;
+// L = $L;
 dimensions      [0 1 -1 0 0 0 0];
 
 internalField   uniform (0 0 0);
@@ -23,28 +28,60 @@ boundaryField
 {
     leftWall
     {
-        // type            pressureInletVelocity;
-        // value           uniform (0 0 0);
-        type zeroGradient;
+        // type            pressureInletOutletVelocity;
+        // value           uniform (0.5 0 0);
+        type codedFixedValue;
+        value     uniform (0 0 0);
+
+        redirectType    parabolic_vel_profile;
+
+        code
+        #{
+          #include "/home/patrick/OpenFOAM/patrick-7/run/test_riblets/test_riblet_v3/solo_riblet/constants2.dat"
+          const fvPatch& boundaryPatch = patch();
+          const vectorField& Cf = boundaryPatch.Cf();
+          vectorField& field = *this;
+
+          forAll(Cf, faceI)
+          {
+            const scalar y = Cf[faceI].y();
+            //p1_i $:p100;
+            //p1_i $:p_1;
+            //const scalar u_x = -(($:p100 - p_0)/L)*y*(h - y);
+            const scalar u_x = -((p_1 - p_0)/L)*y*(h-y);
+
+            field[faceI] = vector(u_x, 0, 0);
+          }
+        #};
 
     }
+
+
     rightWall
     {
       // type            pressureInletVelocity;
       // value           uniform (0 0 0);
-      type zeroGradient;
+      type            freestreamVelocity;
+        freestreamValue $internalField;
     }
+
+
     lowerWall
     {
         type            noSlip;
     }
+
+
     atmosphere
     {
         // type            pressureInletOutletVelocity;
         // value           uniform (10 0 0);
-        type            fixedValue;
-        value           uniform (8 0 0);
+        // type            fixedValue;
+        // value           uniform (0.1 0 0);
+        type noSlip;
     }
+
+
     defaultFaces
     {
         type            empty;

@@ -13,7 +13,7 @@ FoamFile
     object      p_rgh;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
+#includeIfPresent "../constants.dat"
 dimensions      [1 -1 -2 0 0 0 0];
 
 internalField   uniform 0;
@@ -26,8 +26,8 @@ boundaryField
         // value           uniform 0;
         //type            zeroGradient;
 
-        type             totalPressure;
-        p0               uniform 0;
+        type             fixedValue;
+        value               uniform $p_0;
     }
 
     rightWall
@@ -36,8 +36,8 @@ boundaryField
         // value           uniform 0;
 
         //type            zeroGradient;
-        type             totalPressure;
-        p0               uniform 0;
+        type             fixedValue;
+        value               uniform $p_1;
     }
 
     lowerWall
@@ -49,7 +49,7 @@ boundaryField
 
     atmosphere
     {
-        type            totalPressure;
+        type            fixedFluxPressure;
         p0              uniform 0;
         // type               fixedValue;
         // value              uniform 0;

@@ -56,8 +56,8 @@ vertices
 ribletX_nC 12; //the no. of x-cells in the blocks on/above the riblets
 plateauX_nC 10; //the no. of x-cells in the blocks on/above the space between riblets
 
-surfaceY_nC 12; //the no. of y-cells in the blocks on the surface
-fluidY_nC 15; //the n0. of y-cells in the blocks in the surrounding fluid (e.g. ocean)
+surfaceY_nC 20; //the no. of y-cells in the blocks on the surface
+fluidY_nC 20; //the n0. of y-cells in the blocks in the surrounding fluid (e.g. ocean)
 
 
 blocks
@@ -112,7 +112,7 @@ boundary
     }
     atmosphere
     {
-        type patch;
+        type wall;
         faces
         (
           (11 12 28 27)

@@ -1,0 +1,6 @@
+//file containing numerical parameters for the system
+p_0 1.;		//pressure at LHS
+p_1 0;		//pressure at RHS
+
+L 0.6485;	//length of system.  This depends on riblet setup so be careful. Also look at scaling.
+h 1.;		//height of system.  Again, be aware of scaling factor in blockMeshDict.

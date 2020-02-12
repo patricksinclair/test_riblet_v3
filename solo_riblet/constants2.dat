@@ -1,0 +1,8 @@
+//this is a duplicate of the other constants file, but in a slightly different format so it can be used
+//in the codedFixedValue boundary condition.
+
+double p_0 = 1.;	//pressure at LHS
+double p_1 = 0;		//pressure at RHS
+
+double L = 0.6485;	//length of system.  This depends on riblet setup so be careful. Also look at scaling.
+double h = 1.;		//height of system.  Again, be aware of scaling factor in blockMeshDict.
